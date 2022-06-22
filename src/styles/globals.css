@@ -1,0 +1,76 @@
+/* html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+} */
+/* Checkbox */
+
+.custom-checkbox {    
+  height: 100%;
+  display: inline-block;
+  width: 2.5em;
+  border: 1px solid #ffc801;
+  border-radius: 3px;}
+
+/* STOCK LIST */
+
+.stock-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.stock-list {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 100%;
+}
+
+.stock-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 4em;
+  padding-bottom: 3em;
+  padding-top: 2em;
+  height: 100%;
+}
+
+.stock-table-header {
+  border-bottom: 2px solid #ffc801;
+  color: white;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.stock-item-dark {
+  background-color: #1a1a1a;
+  color: white;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.stock-item-light {
+  background-color: #262626;
+  color: white;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SCANNER PAGE */
+
+
