@@ -10,25 +10,14 @@ export default function Home() {
     window.location.href = 'http://localhost:3001/api/auth/discord';
   }
   return (
-    <div style={{backgroundColor: "#202020", display: "flex", justifyContent: "center", alignItems: "center", minWidth: "100vh", width: "100vw", minHeight: "100vh", height: "100vh"}}>
+    <div className={"login-page"}>
       <Head>
         <title>Bozo Scanner</title>
       </Head>
-      <div style={{
-        display: "flex", 
-        flexDirection: "column", 
-        alignItems: "flex-start", 
-        minHeight: "18em", 
-        height: "18em", 
-        width: "15em", 
-        minWidth: "15em", 
-        backgroundColor: "#171717", 
-        border: "1px solid #2d2d2d", 
-        borderRadius: "3px"
-      }}>
+      <div className={"login-container"}>
         <div style={{alignSelf: "center", marginTop: "2em"}}>
           <Image 
-            style={{borderRadius: "5px"}} 
+            style={{borderRadius: "100%"}} 
             src={bozoImg} 
             width="150px" 
             height="150px" 
@@ -40,17 +29,26 @@ export default function Home() {
           height: "100%"
         }}>
           <Button 
-            style={{
-              alignSelf: "flex-end", 
-              marginBottom: "2em", 
-              backgroundColor: "#6985d9", 
-              border: "none"
-            }}
+            className={"login-button"}
             onClick={handleLogin}>
               Login&nbsp;
               <FontAwesomeIcon icon={faDiscord} />
             </Button>
         </div>
+      </div>
+      <div>
+        <svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g className="parallax">
+            <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(255, 200, 1,0.7" />
+            <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(255, 200, 1,0.5)" />
+            <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(255, 200, 1,0.3)" />
+            <use xlinkHref="#gentle-wave" x="48" y="7" fill="#ffc801" />
+          </g>
+        </svg>
       </div>
     </div>
   )

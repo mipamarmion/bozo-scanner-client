@@ -40,7 +40,7 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
         </Head>
-        <body>
+        <body style={{backgroundColor: "#171717", overflow: "hidden"}}>
           <Main />
           <NextScript />
         </body>
