@@ -5,10 +5,11 @@ import { Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 
-export default function Home() {
+export default function Home(props) {
   const handleLogin = () => {
-    window.location.href = 'http://localhost:3001/api/auth/discord';
+    window.location.href = props.redirectUrl;
   }
+  
   return (
     <div className={"login-page"}>
       <Head>
@@ -52,4 +53,8 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export function getStaticProps() {
+  return {props: {redirectUrl: process.env.API_URL + '/auth/discord'}};
 }

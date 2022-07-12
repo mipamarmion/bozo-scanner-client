@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Form, Overlay, Tooltip  } from 'react-bootstrap';
+import { Row, Col, Form, Button  } from 'react-bootstrap';
 import SKUInput from './SKUInput.jsx';
-import FilterDropdown from './FilterDropdown.jsx';
-import { newSku, updateSkuStock, deleteSku } from '../../helper/consumer';
 import Checkbox from '../custom/Checkbox.jsx';
 
 class SneakerForm extends Component {
@@ -11,7 +9,6 @@ class SneakerForm extends Component {
 
     this.skuInputRef = React.createRef();
     this.autofillBox = React.createRef();
-    this.autoSubmitBox = React.createRef();
 
     this.state = {
         skuData: {
@@ -35,30 +32,13 @@ class SneakerForm extends Component {
           submit: false,
           fill: false
         },
-        submittedSkuQueue: [],
+        submittedSkuHistory: [],
         isSubmitting: false,
         autoSubmit: false,
         autoFill: true,
         partialMatchCount: 0,
         isLoading: false
     };
-
-    this.skuDidChange = this.skuDidChange.bind(this);
-    this.sizeDidChange = this.sizeDidChange.bind(this);
-    this.colorDidChange = this.colorDidChange.bind(this);
-    this.makeDidChange = this.makeDidChange.bind(this);
-    this.modelDidChange = this.modelDidChange.bind(this);
-    this.modelNumberDidChange = this.modelNumberDidChange.bind(this);
-    this.submitForm = this.submitForm.bind(this);
-    this.isLoadingDidChange = this.isLoadingDidChange.bind(this);
-    this.importSkuData = this.importSkuData.bind(this);
-    this.getHighestMatchRatio = this.getHighestMatchRatio.bind(this);
-    this.undoLastSubmission = this.undoLastSubmission.bind(this);
-    this.skuDataDidChange = this.skuDataDidChange.bind(this);
-    this.isFormValid = this.isFormValid.bind(this);
-    this.onAutoSubmitChange = this.onAutoSubmitChange.bind(this);
-    this.onAutoFillChange = this.onAutoFillChange.bind(this);
-    this.toggleTooltip = this.toggleTooltip.bind(this);
   }
 
   importSkuData(sharedSkuData) {
@@ -191,34 +171,34 @@ class SneakerForm extends Component {
 
   undoLastSubmission() {
     let state = this.state;
-    let lastSubmittedSku = state.submittedSkuQueue[state.submittedSkuQueue.length - 1];
+    let lastSubmittedSku = state.submittedSkuHistory[state.submittedSkuHistory.length - 1];
 
     if(lastSubmittedSku.count === 0) {
-      deleteSku(lastSubmittedSku.sku)
-      .then((result) => {
-        let state = this.state;
+      // deleteSku(lastSubmittedSku.sku)
+      // .then((result) => {
+      //   let state = this.state;
 
-        if(result.error) {
+      //   if(result.error) {
 
-        } else {
-          state.submittedSkuQueue.pop();
-        }
+      //   } else {
+      //     state.submittedSkuQueue.pop();
+      //   }
 
-        this.setState(state);
-      })
+      //   this.setState(state);
+      // })
     } else {
-      updateSkuStock({sku: lastSubmittedSku.sku, count: lastSubmittedSku.count})
-      .then((result) => {
-        let state = this.state;
+      // updateSkuStock({sku: lastSubmittedSku.sku, count: lastSubmittedSku.count})
+      // .then((result) => {
+      //   let state = this.state;
 
-        if(result.error) {
+      //   if(result.error) {
 
-        } else {
-          state.submittedSkuQueue.pop();
-        }
+      //   } else {
+      //     state.submittedSkuQueue.pop();
+      //   }
 
-        this.setState(state);
-      })
+      //   this.setState(state);
+      // })
     }
 
     this.setState(state);
@@ -234,44 +214,44 @@ class SneakerForm extends Component {
 
     if(state.skuData.count === 0) {
       state.skuData.count = 1;
-      newSku(state.skuData)
-      .then((result) => {
-        let state = this.state;
+      // newSku(state.skuData)
+      // .then((result) => {
+      //   let state = this.state;
 
-        state.isSubmitting = false;
+      //   state.isSubmitting = false;
   
-        if(result.result) {
-          state.skuData.sku = "";
-          state.isLoading = false;
-          state.submittedSkuQueue.push({sku: this.state.skuData.sku, count: 0});
-        } else {
-          state.isLoading = false;
-          console.error(result?.error);
-        }
+      //   if(result.result) {
+      //     state.skuData.sku = "";
+      //     state.isLoading = false;
+      //     state.submittedSkuQueue.push({sku: this.state.skuData.sku, count: 0});
+      //   } else {
+      //     state.isLoading = false;
+      //     console.error(result?.error);
+      //   }
   
-        this.setState(state);
-        this.skuInputRef.current.focus();
-      });
+      //   this.setState(state);
+      //   this.skuInputRef.current.focus();
+      // });
     } else {
-      updateSkuStock({sku: this.state.skuData.sku, count: this.state.skuData.count + 1})
-      .then((result) => {
-        let state = this.state;
+      // updateSkuStock({sku: this.state.skuData.sku, count: this.state.skuData.count + 1})
+      // .then((result) => {
+      //   let state = this.state;
 
-        state.isSubmitting = false;
+      //   state.isSubmitting = false;
   
-        if(result.result) {
-          state.skuData.sku = "";
-          state.skuData.count += 1;
-          state.submittedSkuQueue.push({sku: this.state.skuData.sku, count: this.state.skuData.count});
-          state.isLoading = false;
-        } else {
-          state.isLoading = false;
-          console.error(result?.error);
-        }
+      //   if(result.result) {
+      //     state.skuData.sku = "";
+      //     state.skuData.count += 1;
+      //     state.submittedSkuQueue.push({sku: this.state.skuData.sku, count: this.state.skuData.count});
+      //     state.isLoading = false;
+      //   } else {
+      //     state.isLoading = false;
+      //     console.error(result?.error);
+      //   }
   
-        this.setState(state);
-        this.skuInputRef.current.focus();
-      });
+      //   this.setState(state);
+      //   this.skuInputRef.current.focus();
+      // });
     }
     
     this.setState(state);
@@ -322,12 +302,12 @@ class SneakerForm extends Component {
               style={{backgroundColor: "#202020", border: "none", color: "#dfdfdf"}} />
             <div style={{borderBottom: "1px solid #ffc801"}}></div>
             <br />
-            <FilterDropdown 
-              isInvalid={this.state.invalidFields.size} 
-              disabled={this.state.isLoading} 
+            <Form.Control 
+              disabled={this.state.isSubmitting} 
               value={this.state.skuData.size} 
               onChange={this.sizeDidChange} 
-              field={"size"} />
+              placeholder="Size" 
+              style={{backgroundColor: "#202020", border: "none", color: "#dfdfdf"}} />
             <div style={{borderBottom: "1px solid #ffc801"}}></div>
             <br />
             <Form.Control 
@@ -338,7 +318,7 @@ class SneakerForm extends Component {
               style={{backgroundColor: "#202020", border: "none", color: "#dfdfdf"}} />
             <div style={{borderBottom: "1px solid #ffc801"}}></div>
             <br />
-            <FilterDropdown 
+            <Form.Control 
               isInvalid={this.state.invalidFields.make} 
               disabled={this.state.isLoading} 
               value={this.state.skuData.make} 
@@ -370,7 +350,7 @@ class SneakerForm extends Component {
               Stock
             </Button>
             <Button 
-              disabled={this.state.isLoading || !this.state.submittedSkuQueue.length} 
+              disabled={this.state.isLoading || !this.state.submittedSkuHistory.length} 
               onClick={this.undoLastSubmission} 
               style={{float: "right", marginRight: "0.25em", backgroundColor: "#9F9F9F", borderColor: "#7A7A7A"}} 
               variant="secondary">

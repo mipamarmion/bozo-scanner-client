@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { InputGroup, FormControl, Row, Overlay, Tooltip } from 'react-bootstrap';
-import { getSkuData } from '../../helper/consumer.js'; 
+// import { getSkuData } from '../../helper/consumer.js'; 
 import Checkbox from '../custom/Checkbox.jsx';
 
 const AUTO_FILL_BUFFER = 1000;
